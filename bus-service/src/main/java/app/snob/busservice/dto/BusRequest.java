@@ -1,8 +1,6 @@
 package app.snob.busservice.dto;
 
 import app.snob.busservice.model.BusStatus;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

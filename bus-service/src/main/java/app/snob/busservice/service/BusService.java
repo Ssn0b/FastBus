@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class BusService {
+
     private final BusRepository busRepository;
     private final ObjectMapper objectMapper;
 
@@ -35,7 +36,7 @@ public class BusService {
     public BusResponse getBusById(UUID id){
         return busRepository.findById(id)
                 .map(this::mapToBusResponse)
-                .orElse(null);
+                .orElseThrow(() -> new EntityNotFoundException("Bus with ID " + id + " not found"));
     }
 
     public void saveBus(MultipartFile file, String busData){
