@@ -1,17 +1,7 @@
 version: '3.8'
 services:
-  postgres-bus:
-    container_name: bus-service
-    image: postgres:latest
-    environment:
-      POSTGRES_DB: bus-service
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - "5431:5431"
-    restart: unless-stopped
 
-  postgres-route:
+  postgres-bus:
     container_name: route-service
     image: postgres:latest
     environment:
@@ -20,4 +10,15 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
+    restart: unless-stopped
+
+  postgres-route:
+    container_name: bus-service
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: bus-service
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5431:5432"
     restart: unless-stopped

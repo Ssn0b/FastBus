@@ -91,9 +91,9 @@ public class BusService {
 //                            .orElseThrow(() -> new EntityNotFoundException("Driver with ID " + updatedDriverId + " not found."));
 //                    existingBus.setDriver(updatedDriver);
 //                }
-                if (updatedBus.getBusStatus() != null) {
-                    existingBus.setBusStatus(updatedBus.getBusStatus());
-                }
+//                if (updatedBus.getBusStatus() != null) {
+//                    existingBus.setBusStatus(updatedBus.getBusStatus());
+//                }
                 busRepository.save(existingBus);
             }
             return ResponseEntity.ok("Bus updated successfully.");
@@ -120,9 +120,13 @@ public class BusService {
                 .id(bus.getId())
                 .seats(bus.getSeats())
                 .brand(bus.getBrand())
-                .busStatus(bus.getBusStatus())
+//                .busStatus(bus.getBusStatus())
                 .photoUrl(bus.getPhotoUrl())
                 .carNumber(bus.getCarNumber())
                 .build();
+    }
+
+    public boolean doesBusExist(UUID id) {
+        return busRepository.existsById(id);
     }
 }

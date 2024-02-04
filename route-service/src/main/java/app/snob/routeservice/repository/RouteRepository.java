@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface RouteRepository extends JpaRepository<Route, UUID> {
+    boolean existsRouteByBusId(UUID id);
 }

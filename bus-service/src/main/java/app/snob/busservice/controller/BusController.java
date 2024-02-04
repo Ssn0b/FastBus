@@ -42,4 +42,8 @@ public class BusController {
         busService.deleteBusById(id);
         return ResponseEntity.ok("Bus deleted successfully.");
     }
+    @GetMapping("/exist/{id}")
+    public boolean checkIfBusExists(@PathVariable UUID id) {
+        return busService.doesBusExist(id);
+    }
 }

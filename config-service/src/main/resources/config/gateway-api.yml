@@ -1,0 +1,79 @@
+server:
+  port: 8080
+  forward-headers-strategy: framework
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.http.server.reactive: TRACE
+
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4200"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+      httpclient:
+        ssl:
+          useInsecureTrustManager: true
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: bus-service
+          uri: lb://bus-service
+          predicates:
+            - Path=/bus/**, /api/v1/bus/**
+          filters:
+            - ContextPathRewritePath=/api/v1/bus/(?<path>.*), /$\{path}
+            - RewritePath=/bus/(?<path>.*), /$\{path}
+        - id: route-service
+          uri: lb://route-service
+          predicates:
+            - Path=/route/**, /api/v1/route/**
+          filters:
+            - ContextPathRewritePath=/api/v1/route/(?<path>.*), /$\{path}
+            - RewritePath=/route/(?<path>.*), /$\{path}
+        - id: openapi-proxy
+          uri: https://demos.springdoc.org
+          predicates:
+            - Path=/demo-microservices/v3/api-docs/**
+          filters:
+            - RewritePath=/demo-microservices/v3/api-docs/(?<path>.*), /demo-microservices/$\{path}/v3/api-docs
+        - id: openapi
+          uri: http://localhost:${server.port}
+          predicates:
+            - Path=/v3/api-docs/**
+          filters:
+            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+
+
+springdoc:
+  swagger-ui:
+    urls:
+      - name: bus
+        url: /v3/api-docs/bus
+      - name: route
+        url: /v3/api-docs/route
+  cache:
+    disabled: true
