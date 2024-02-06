@@ -21,8 +21,8 @@ public class Bus {
     private String brand;
     private int seats;
     private String carNumber;
-//    @Enumerated(EnumType.STRING)
-//    private BusStatus busStatus;
+    @Enumerated(EnumType.STRING)
+    private BusStatus busStatus;
     private String photoUrl;
 //    @OneToOne
 //    @JoinColumn(name = "driver_id")

@@ -50,10 +50,10 @@ spring:
         - id: route-service
           uri: lb://route-service
           predicates:
-            - Path=/route/**, /api/v1/route/**
+            - Path=/route/**, /api/v1/route/**, /stop/**, /api/v1/stop/**, /city/**, /api/v1/city/**
           filters:
-            - ContextPathRewritePath=/api/v1/route/(?<path>.*), /$\{path}
-            - RewritePath=/route/(?<path>.*), /$\{path}
+            - ContextPathRewritePath=/api/v1/route/(?<path>.*), /$\{path}, /api/v1/city/(?<path>.*), /api/v1/stop/(?<path>.*)
+            - RewritePath=/route/(?<path>.*), /$\{path}, /city/(?<path>.*), /stop/(?<path>.*)
         - id: openapi-proxy
           uri: https://demos.springdoc.org
           predicates:

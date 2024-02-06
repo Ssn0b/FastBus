@@ -1,6 +1,5 @@
 package app.snob.busservice.service;
 
-import app.snob.busservice.dto.BusRequest;
 import app.snob.busservice.dto.BusResponse;
 import app.snob.busservice.model.Bus;
 import app.snob.busservice.repository.BusRepository;
@@ -120,7 +119,7 @@ public class BusService {
                 .id(bus.getId())
                 .seats(bus.getSeats())
                 .brand(bus.getBrand())
-//                .busStatus(bus.getBusStatus())
+                .busStatus(bus.getBusStatus())
                 .photoUrl(bus.getPhotoUrl())
                 .carNumber(bus.getCarNumber())
                 .build();

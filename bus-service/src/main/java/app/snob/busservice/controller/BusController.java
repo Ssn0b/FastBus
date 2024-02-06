@@ -20,7 +20,7 @@ public class BusController {
     public ResponseEntity<String> addBus(@RequestParam("file") MultipartFile file,
                                          @RequestParam("bus") String busData) {
         busService.saveBus(file, busData);
-        return ResponseEntity.ok("Bus added successfully.");
+        return ResponseEntity.ok("Bus added successfully");
     }
     @PutMapping("/{id}")
     public ResponseEntity<String> updateBus(@PathVariable("id") UUID id, @RequestParam("file") MultipartFile file,

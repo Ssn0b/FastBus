@@ -8,4 +8,4 @@ springdoc:
   swagger-ui:
     use-root-path: true
   api-docs:
-    version: openapi_3_1
+    version: openapi_3_0

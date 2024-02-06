@@ -21,6 +21,7 @@
         <module>gateway-api</module>
         <module>route-service</module>
         <module>config-service</module>
+        <module>ticket-service</module>
     </modules>
 
     <properties>
